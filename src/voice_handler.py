@@ -9,9 +9,20 @@ class VoiceHandler:
         self.engine.setProperty('rate', 150)  # Speech speed
         self.engine.setProperty('volume', 1.0)  # Volume 0-1
         self.language = language
+        self.microphone_available = self._check_microphone()
         
         # Set voice based on language
         self.set_language(language)
+
+    def _check_microphone(self):
+        """Return whether SpeechRecognition can access a PyAudio microphone."""
+        try:
+            sr.Microphone.list_microphone_names()
+            return True
+        except Exception as e:
+            print(f"Voice input disabled: {e}")
+            print("Install PyAudio or use typed commands in this session.")
+            return False
     
     def set_language(self, language):
         """Set language for text-to-speech"""
@@ -29,9 +40,12 @@ class VoiceHandler:
     
     def listen(self, timeout=5):
         """Listen to user voice input and return text"""
+        if not self.microphone_available:
+            return None
+
         try:
             with sr.Microphone() as source:
-                print("🎤 Listening...")
+                print("[mic] Listening...")
                 self.recognizer.adjust_for_ambient_noise(source, duration=1)
                 audio = self.recognizer.listen(source, timeout=timeout)
                 
@@ -60,7 +74,7 @@ class VoiceHandler:
     
     def speak(self, text):
         """Convert text to speech"""
-        print(f"🤖 Assistant: {text}")
+        print(f"[assistant] {text}")
         self.engine.say(text)
         self.engine.runAndWait()
     

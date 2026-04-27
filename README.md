@@ -25,8 +25,10 @@ A local, rule-based Python AI assistant for Windows that responds to voice comma
    pip install pyaudio
    ```
    
-   If you encounter issues, download a pre-built wheel from:
-   https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
+   If PyAudio fails to build on Python 3.14, use Python 3.11, 3.12, or 3.13 for this project,
+   then recreate the virtual environment and run `pip install -r requirements.txt`.
+   You can also install Microsoft C++ Build Tools and PortAudio headers, but using a
+   Python version with a PyAudio wheel is usually simpler.
 
 ## Usage
 
@@ -114,7 +116,7 @@ Open: Chrome, Firefox, Edge, Notepad, Calculator, Spotify, VLC
 ## Troubleshooting
 
 - **No microphone detected**: Check your audio input device in System Settings
-- **PyAudio installation fails**: Use pre-built wheels or anaconda
+- **PyAudio installation fails**: Use Python 3.11, 3.12, or 3.13, recreate `.venv`, then install dependencies again
 - **Commands not recognized**: Check `config/commands.json` for correct keywords
 - **Language not detected**: Try specifying language explicitly (english/swahili)
 

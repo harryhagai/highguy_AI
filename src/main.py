@@ -1,109 +1,151 @@
 #!/usr/bin/env python3
-"""
-Voice-Controlled AI Assistant
-Local, rule-based Python assistant with no external AI dependencies
-Supports English and Swahili
-"""
+"""Terminal menu for the Highguy AI Assistant memory system."""
 
 import sys
-import os
-from voice_handler import VoiceHandler
-from command_processor import CommandProcessor
 
-class AIAssistant:
-    def __init__(self, language="auto"):
-        print("\n" + "="*50)
-        print("🤖 Voice-Controlled AI Assistant")
-        print("="*50)
-        print("Starting up...\n")
-        
-        self.language = language
-        self.voice = VoiceHandler(language if language != "auto" else "english")
-        self.processor = CommandProcessor(language if language != "auto" else "english")
-        self.running = True
-        self.current_language = language if language != "auto" else "english"
-        
-        # Greet user based on language
-        if self.language == "swahili" or self.language == "auto":
-            self.voice.speak("Habari! Mimi ni msaada wako wa sauti. Sema 'msaada' ili kujua amri zinazopatikana.")
-        else:
-            self.voice.speak("Hello! I'm your AI assistant. Say help to learn what I can do.")
-    
-    def run(self):
-        """Main loop - listen and process commands"""
-        if self.language == "swahili":
-            print("Listening for Swahili commands... (Say 'kwaheri' to quit)\n")
-        elif self.language == "english":
-            print("Listening for English commands... (Say 'exit' to quit)\n")
-        else:
-            print("Listening for commands in any language... (Say 'exit' or 'kwaheri' to quit)\n")
-        
-        while self.running:
-            try:
-                # Listen for voice input
-                user_input = self.voice.listen(timeout=5)
-                
-                if user_input is None:
-                    continue
-                
-                # Detect language if in auto mode
-                if self.language == "auto":
-                    detected_lang = self.processor.detect_language(user_input)
-                    self.processor.language = detected_lang
-                    self.voice.set_language(detected_lang)
-                
-                # Check for exit commands in both languages
-                exit_keywords = ['exit', 'quit', 'bye', 'goodbye', 'kwaheri', 'karibu', 'pole', 'goodbye']
-                if any(word in user_input for word in exit_keywords):
-                    if self.language == "swahili" or (self.language == "auto" and self.processor.detect_language(user_input) == "swahili"):
-                        self.voice.speak("Kwaheri! Tutaonana baadaye.")
-                    else:
-                        self.voice.speak("Goodbye! See you later.")
-                    self.running = False
-                    break
-                
-                # Process and execute command
-                response = self.processor.process_command(user_input)
-                
-                # Speak response
-                self.voice.speak(response)
-                
-                print("-" * 50 + "\n")
-                
-            except KeyboardInterrupt:
-                print("\n\nShutting down...")
-                if self.language == "swahili":
-                    self.voice.speak("Kwaheri!")
-                else:
-                    self.voice.speak("Goodbye!")
-                self.running = False
-            except Exception as e:
-                print(f"Error: {e}")
-                if self.language == "swahili":
-                    self.voice.speak("Hitilafu ilitokea. Tafadhali jaribu tena.")
-                else:
-                    self.voice.speak("An error occurred. Please try again.")
+from ai_engine import AIEngine
+from memory_manager import MemoryManager
+
+
+def print_menu():
+    print("\nHIGHGUY AI ASSISTANT")
+    print("1. Add new memory")
+    print("2. Search memory")
+    print("3. Show all memories")
+    print("4. Ask assistant")
+    print("5. Delete memory")
+    print("6. Exit")
+
+
+def print_memory(memory):
+    print(f"\nID: {memory['id']}")
+    print(f"Title: {memory['title']}")
+    print(f"Content: {memory['content']}")
+    print(f"Tags: {memory['tags'] or 'None'}")
+    print(f"Created: {memory['created_at']}")
+    print(f"Updated: {memory['updated_at'] or 'Not updated'}")
+
+
+def add_new_memory(memory_manager):
+    title = input("Title: ").strip()
+    content = input("Content: ").strip()
+    tags = input("Tags: ").strip()
+
+    if not title or not content:
+        print("Title and content cannot be empty.")
+        return
+
+    try:
+        memory_manager.add_memory(title, content, tags)
+        print("Memory saved successfully.")
+    except (RuntimeError, ValueError) as error:
+        print(f"Error: {error}")
+
+
+def search_memory(memory_manager):
+    keyword = input("Search keyword: ").strip()
+
+    if not keyword:
+        print("Search keyword cannot be empty.")
+        return
+
+    try:
+        memories = memory_manager.search_memory(keyword)
+    except RuntimeError as error:
+        print(f"Error: {error}")
+        return
+
+    if not memories:
+        print("No memories found.")
+        return
+
+    for memory in memories:
+        print_memory(memory)
+
+
+def show_all_memories(memory_manager):
+    try:
+        memories = memory_manager.get_all_memories()
+    except RuntimeError as error:
+        print(f"Error: {error}")
+        return
+
+    if not memories:
+        print("No memories saved yet.")
+        return
+
+    for memory in memories:
+        print_memory(memory)
+
+
+def ask_assistant(ai_engine):
+    question = input("Question: ").strip()
+
+    if not question:
+        print("Question cannot be empty.")
+        return
+
+    try:
+        response = ai_engine.generate_response(question)
+        print("\nAssistant response:")
+        print(response)
+    except (RuntimeError, ValueError) as error:
+        print(f"Error: {error}")
+
+
+def delete_memory(memory_manager):
+    memory_id_text = input("Memory ID to delete: ").strip()
+
+    if not memory_id_text:
+        print("Memory ID cannot be empty.")
+        return
+
+    try:
+        memory_id = int(memory_id_text)
+    except ValueError:
+        print("Memory ID must be a number.")
+        return
+
+    try:
+        deleted = memory_manager.delete_memory(memory_id)
+    except RuntimeError as error:
+        print(f"Error: {error}")
+        return
+
+    if deleted:
+        print("Memory deleted successfully.")
+    else:
+        print("Memory not found.")
+
 
 def main():
     try:
-        # Check for language argument
-        language = "auto"  # Default: auto-detect
-        
-        if len(sys.argv) > 1:
-            if sys.argv[1].lower() in ["swahili", "sw"]:
-                language = "swahili"
-            elif sys.argv[1].lower() in ["english", "en"]:
-                language = "english"
-            elif sys.argv[1].lower() in ["auto"]:
-                language = "auto"
-        
-        print(f"Language mode: {language.upper()}")
-        
-        assistant = AIAssistant(language)
-        assistant.run()
-    except Exception as e:
-        print(f"Failed to start assistant: {e}")
+        memory_manager = MemoryManager()
+        ai_engine = AIEngine(memory_manager)
+    except RuntimeError as error:
+        print(f"Failed to start assistant: {error}")
         sys.exit(1)
+
+    while True:
+        print_menu()
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
+            add_new_memory(memory_manager)
+        elif choice == "2":
+            search_memory(memory_manager)
+        elif choice == "3":
+            show_all_memories(memory_manager)
+        elif choice == "4":
+            ask_assistant(ai_engine)
+        elif choice == "5":
+            delete_memory(memory_manager)
+        elif choice == "6":
+            print("Goodbye.")
+            break
+        else:
+            print("Invalid menu choice. Please enter a number from 1 to 6.")
+
 
 if __name__ == "__main__":
     main()
