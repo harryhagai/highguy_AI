@@ -1,0 +1,54 @@
+{
+  "english": {
+    "greetings": ["hello", "hi", "hey"],
+    "help": ["help", "what can you do", "commands"],
+    "time": ["what time is it", "time", "current time"],
+    "date": ["what is the date", "date", "today"],
+    "open_apps": {
+      "notepad": ["open notepad", "notepad"],
+      "calculator": ["open calculator", "calculator", "calc"],
+      "chrome": ["open chrome", "chrome"],
+      "firefox": ["open firefox", "firefox"],
+      "edge": ["open edge", "microsoft edge"],
+      "spotify": ["open spotify", "spotify"],
+      "vlc": ["open vlc", "vlc player"]
+    },
+    "music": {
+      "play": ["play music", "start music", "play"],
+      "stop": ["stop music", "pause music", "stop"],
+      "next": ["next song", "skip"]
+    },
+    "system": {
+      "list_files": ["list files", "show files", "ls"],
+      "shutdown": ["shutdown", "turn off"],
+      "restart": ["restart"],
+      "lock": ["lock screen", "lock"]
+    }
+  },
+  "swahili": {
+    "greetings": ["habari", "salaam", "jambo", "habari yako"],
+    "help": ["msaada", "unaweza kufanya nini", "amri"],
+    "time": ["saa gani", "saa", "saa ya sasa"],
+    "date": ["tarehe gani", "tarehe", "leo"],
+    "open_apps": {
+      "notepad": ["fungua notepad", "notepad"],
+      "calculator": ["fungua calculator", "calculator"],
+      "chrome": ["fungua chrome", "chrome"],
+      "firefox": ["fungua firefox", "firefox"],
+      "edge": ["fungua edge", "edge"],
+      "spotify": ["fungua spotify", "spotify"],
+      "vlc": ["fungua vlc", "vlc"]
+    },
+    "music": {
+      "play": ["cheza muziki", "mziki", "anzisha"],
+      "stop": ["simama muziki", "sitisha"],
+      "next": ["nyimbo inayofuata", "ruka"]
+    },
+    "system": {
+      "list_files": ["orodha ya faili", "faili", "onyesha"],
+      "shutdown": ["zima", "imara"],
+      "restart": ["anzisha upya", "restart"],
+      "lock": ["funga skrini", "funga"]
+    }
+  }
+}
