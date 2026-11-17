@@ -1,54 +1,451 @@
 {
   "english": {
-    "greetings": ["hello", "hi", "hey"],
-    "help": ["help", "what can you do", "commands"],
-    "time": ["what time is it", "time", "current time"],
-    "date": ["what is the date", "date", "today"],
+    "greetings": [
+      "hello",
+      "hi",
+      "hey",
+      "good afternoon",
+      "good evening"
+    ],
+    "help": [
+      "help",
+      "what can you do",
+      "commands"
+    ],
+    "time": [
+      "what time is it",
+      "time",
+      "current time"
+    ],
+    "date": [
+      "what is the date",
+      "date",
+      "today"
+    ],
     "open_apps": {
-      "notepad": ["open notepad", "notepad"],
-      "calculator": ["open calculator", "calculator", "calc"],
-      "chrome": ["open chrome", "chrome"],
-      "firefox": ["open firefox", "firefox"],
-      "edge": ["open edge", "microsoft edge"],
-      "spotify": ["open spotify", "spotify"],
-      "vlc": ["open vlc", "vlc player"]
+      "notepad": [
+        "open notepad",
+        "notepad"
+      ],
+      "calculator": [
+        "open calculator",
+        "calculator",
+        "calc"
+      ],
+      "chrome": [
+        "open chrome",
+        "chrome"
+      ],
+      "firefox": [
+        "open firefox",
+        "firefox"
+      ],
+      "edge": [
+        "open edge",
+        "microsoft edge"
+      ],
+      "spotify": [
+        "open spotify",
+        "spotify"
+      ],
+      "vlc": [
+        "open vlc",
+        "vlc player"
+      ],
+      "explorer": [
+        "open file explorer",
+        "file explorer",
+        "open explorer"
+      ],
+      "paint": [
+        "open paint",
+        "paint"
+      ],
+      "settings": [
+        "open settings",
+        "windows settings"
+      ],
+      "task manager": [
+        "open task manager",
+        "task manager"
+      ],
+      "cmd": [
+        "open cmd",
+        "open command prompt",
+        "command prompt"
+      ]
     },
+    "websites": {
+      "youtube": [
+        "open youtube",
+        "youtube"
+      ],
+      "google": [
+        "open google",
+        "google"
+      ],
+      "gmail": [
+        "open gmail",
+        "gmail"
+      ],
+      "github": [
+        "open github",
+        "github"
+      ],
+      "whatsapp": [
+        "open whatsapp",
+        "whatsapp"
+      ]
+    },
+    "web_search": [
+      "search for",
+      "search",
+      "google"
+    ],
     "music": {
-      "play": ["play music", "start music", "play"],
-      "stop": ["stop music", "pause music", "stop"],
-      "next": ["next song", "skip"]
+      "play": [
+        "play music",
+        "start music",
+        "play song",
+        "play"
+      ],
+      "pause": [
+        "pause music",
+        "pause"
+      ],
+      "resume": [
+        "resume music",
+        "resume",
+        "continue music"
+      ],
+      "stop": [
+        "stop music",
+        "turn off music",
+        "stop"
+      ],
+      "next": [
+        "next song",
+        "next track",
+        "skip",
+        "skip song"
+      ],
+      "previous": [
+        "previous song",
+        "previous track",
+        "last song"
+      ],
+      "list": [
+        "list songs",
+        "show songs",
+        "playlist",
+        "my songs"
+      ],
+      "shuffle": [
+        "shuffle",
+        "shuffle music",
+        "random song"
+      ]
     },
     "system": {
-      "list_files": ["list files", "show files", "ls"],
-      "shutdown": ["shutdown", "turn off"],
-      "restart": ["restart"],
-      "lock": ["lock screen", "lock"]
-    }
+      "list_files": [
+        "list files",
+        "show files",
+        "ls",
+        "dir"
+      ],
+      "system_info": [
+        "system info",
+        "computer info",
+        "battery",
+        "disk space"
+      ],
+      "shutdown": [
+        "shutdown",
+        "shut down",
+        "turn off computer",
+        "turn off the computer"
+      ],
+      "restart": [
+        "restart",
+        "reboot"
+      ],
+      "cancel_shutdown": [
+        "cancel shutdown",
+        "cancel restart",
+        "abort shutdown"
+      ],
+      "lock": [
+        "lock screen",
+        "lock computer",
+        "lock"
+      ]
+    },
+    "memory": {
+      "remember": [
+        "remember that",
+        "remember",
+        "note that",
+        "save note"
+      ],
+      "recall": [
+        "what do you remember about",
+        "what do you know about",
+        "recall"
+      ],
+      "set_name": [
+        "my name is",
+        "call me"
+      ]
+    },
+    "small_talk": {
+      "about": [
+        "who are you",
+        "what are you",
+        "your name"
+      ],
+      "how_are_you": [
+        "how are you",
+        "how are you doing",
+        "how is it going"
+      ],
+      "thanks": [
+        "thank you",
+        "thanks"
+      ]
+    },
+    "close_app": [
+      "close",
+      "quit app",
+      "kill"
+    ],
+    "briefing": [
+      "briefing",
+      "daily briefing",
+      "morning briefing",
+      "good morning",
+      "what's my day like"
+    ],
+    "list_reminders": [
+      "my reminders",
+      "list reminders",
+      "show reminders",
+      "what are my reminders"
+    ]
   },
   "swahili": {
-    "greetings": ["habari", "salaam", "jambo", "habari yako"],
-    "help": ["msaada", "unaweza kufanya nini", "amri"],
-    "time": ["saa gani", "saa", "saa ya sasa"],
-    "date": ["tarehe gani", "tarehe", "leo"],
+    "greetings": [
+      "habari",
+      "salaam",
+      "jambo",
+      "mambo",
+      "shikamoo"
+    ],
+    "help": [
+      "msaada",
+      "unaweza kufanya nini",
+      "amri"
+    ],
+    "time": [
+      "saa gani",
+      "saa ngapi",
+      "saa",
+      "saa ya sasa"
+    ],
+    "date": [
+      "tarehe gani",
+      "tarehe",
+      "leo"
+    ],
     "open_apps": {
-      "notepad": ["fungua notepad", "notepad"],
-      "calculator": ["fungua calculator", "calculator"],
-      "chrome": ["fungua chrome", "chrome"],
-      "firefox": ["fungua firefox", "firefox"],
-      "edge": ["fungua edge", "edge"],
-      "spotify": ["fungua spotify", "spotify"],
-      "vlc": ["fungua vlc", "vlc"]
+      "notepad": [
+        "fungua notepad",
+        "notepad"
+      ],
+      "calculator": [
+        "fungua calculator",
+        "fungua kikokotoo",
+        "calculator",
+        "kikokotoo"
+      ],
+      "chrome": [
+        "fungua chrome",
+        "chrome"
+      ],
+      "firefox": [
+        "fungua firefox",
+        "firefox"
+      ],
+      "edge": [
+        "fungua edge",
+        "edge"
+      ],
+      "spotify": [
+        "fungua spotify",
+        "spotify"
+      ],
+      "vlc": [
+        "fungua vlc",
+        "vlc"
+      ],
+      "explorer": [
+        "fungua faili explorer",
+        "fungua explorer"
+      ],
+      "paint": [
+        "fungua paint"
+      ],
+      "settings": [
+        "fungua mipangilio",
+        "mipangilio"
+      ],
+      "task manager": [
+        "fungua task manager"
+      ],
+      "cmd": [
+        "fungua cmd"
+      ]
     },
+    "websites": {
+      "youtube": [
+        "fungua youtube",
+        "youtube"
+      ],
+      "google": [
+        "fungua google"
+      ],
+      "gmail": [
+        "fungua gmail",
+        "gmail"
+      ],
+      "github": [
+        "fungua github",
+        "github"
+      ],
+      "whatsapp": [
+        "fungua whatsapp",
+        "whatsapp"
+      ]
+    },
+    "web_search": [
+      "tafuta"
+    ],
     "music": {
-      "play": ["cheza muziki", "mziki", "anzisha"],
-      "stop": ["simama muziki", "sitisha"],
-      "next": ["nyimbo inayofuata", "ruka"]
+      "play": [
+        "cheza muziki",
+        "cheza mziki",
+        "cheza wimbo",
+        "anzisha muziki",
+        "cheza"
+      ],
+      "pause": [
+        "simamisha muziki",
+        "pumzisha muziki",
+        "simamisha"
+      ],
+      "resume": [
+        "endelea muziki",
+        "endeleza muziki",
+        "endelea"
+      ],
+      "stop": [
+        "simama muziki",
+        "zima muziki",
+        "acha muziki",
+        "sitisha"
+      ],
+      "next": [
+        "nyimbo inayofuata",
+        "wimbo unaofuata",
+        "ruka"
+      ],
+      "previous": [
+        "wimbo uliopita",
+        "rudi nyuma"
+      ],
+      "list": [
+        "orodha ya nyimbo",
+        "onyesha nyimbo",
+        "nyimbo zangu"
+      ],
+      "shuffle": [
+        "changanya",
+        "changanya nyimbo",
+        "wimbo wowote"
+      ]
     },
     "system": {
-      "list_files": ["orodha ya faili", "faili", "onyesha"],
-      "shutdown": ["zima", "imara"],
-      "restart": ["anzisha upya", "restart"],
-      "lock": ["funga skrini", "funga"]
-    }
+      "list_files": [
+        "orodha ya faili",
+        "onyesha faili",
+        "faili"
+      ],
+      "system_info": [
+        "taarifa za kompyuta",
+        "betri",
+        "nafasi ya diski"
+      ],
+      "shutdown": [
+        "zima kompyuta",
+        "zima pc"
+      ],
+      "restart": [
+        "anzisha upya",
+        "washa upya"
+      ],
+      "cancel_shutdown": [
+        "sitisha kuzima",
+        "ghairi kuzima"
+      ],
+      "lock": [
+        "funga skrini",
+        "funga kompyuta"
+      ]
+    },
+    "memory": {
+      "remember": [
+        "kumbuka kwamba",
+        "kumbuka kuwa",
+        "kumbuka",
+        "hifadhi"
+      ],
+      "recall": [
+        "unakumbuka nini kuhusu",
+        "unajua nini kuhusu"
+      ],
+      "set_name": [
+        "jina langu ni",
+        "niite"
+      ]
+    },
+    "small_talk": {
+      "about": [
+        "wewe ni nani",
+        "jina lako"
+      ],
+      "how_are_you": [
+        "habari yako",
+        "hujambo",
+        "u hali gani",
+        "uko poa",
+        "habari za leo"
+      ],
+      "thanks": [
+        "asante",
+        "asante sana"
+      ]
+    },
+    "close_app": [
+      "funga"
+    ],
+    "briefing": [
+      "habari za asubuhi",
+      "taarifa ya leo",
+      "muhtasari wa leo"
+    ],
+    "list_reminders": [
+      "vikumbusho vyangu",
+      "orodha ya vikumbusho",
+      "onyesha vikumbusho"
+    ]
   }
 }

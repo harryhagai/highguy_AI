@@ -46,6 +46,26 @@ class MemoryManager:
                     )
                     """
                 )
+                # Log of everything said in chat, so the AI can look back.
+                connection.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS chat_log (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        role TEXT NOT NULL,
+                        text TEXT NOT NULL,
+                        created_at TEXT NOT NULL
+                    )
+                    """
+                )
+                # Small key/value table for app settings (language, voice...).
+                connection.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS settings (
+                        key TEXT PRIMARY KEY,
+                        value TEXT
+                    )
+                    """
+                )
         except sqlite3.Error as error:
             raise RuntimeError(f"Could not create memory table: {error}") from error
 
@@ -112,6 +132,30 @@ class MemoryManager:
         except sqlite3.Error as error:
             raise RuntimeError(f"Could not load memories: {error}") from error
 
+    def get_memory(self, memory_id):
+        """Return one memory as a dictionary, or None if it does not exist."""
+        try:
+            with self._connect() as connection:
+                row = connection.execute(
+                    """
+                    SELECT id, title, content, tags, created_at, updated_at
+                    FROM memory
+                    WHERE id = ?
+                    """,
+                    (memory_id,),
+                ).fetchone()
+                return dict(row) if row else None
+        except sqlite3.Error as error:
+            raise RuntimeError(f"Could not load memory: {error}") from error
+
+    def count_memories(self):
+        """Return how many memories are saved."""
+        try:
+            with self._connect() as connection:
+                return connection.execute("SELECT COUNT(*) FROM memory").fetchone()[0]
+        except sqlite3.Error as error:
+            raise RuntimeError(f"Could not count memories: {error}") from error
+
     def delete_memory(self, memory_id):
         """Delete one memory by id. Returns True when a row was deleted."""
         try:
@@ -163,3 +207,55 @@ class MemoryManager:
                 return cursor.rowcount > 0
         except sqlite3.Error as error:
             raise RuntimeError(f"Could not update memory: {error}") from error
+
+    def get_setting(self, key, default=None):
+        """Read one saved setting, or return the default."""
+        try:
+            with self._connect() as connection:
+                row = connection.execute(
+                    "SELECT value FROM settings WHERE key = ?", (key,)
+                ).fetchone()
+                return row["value"] if row else default
+        except sqlite3.Error:
+            return default
+
+    def set_setting(self, key, value):
+        """Save one setting (insert or replace)."""
+        try:
+            with self._connect() as connection:
+                connection.execute(
+                    "INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)",
+                    (key, str(value)),
+                )
+        except sqlite3.Error as error:
+            raise RuntimeError(f"Could not save setting: {error}") from error
+
+    def log_chat(self, role, text):
+        """Save one chat message ("user" or "assistant") to the chat log."""
+        if not text:
+            return
+        try:
+            with self._connect() as connection:
+                connection.execute(
+                    "INSERT INTO chat_log (role, text, created_at) VALUES (?, ?, ?)",
+                    (role, text, datetime.now().isoformat(timespec="seconds")),
+                )
+        except sqlite3.Error:
+            pass  # the chat log is nice to have, never worth crashing for
+
+    def search_chat(self, keyword, limit=8):
+        """Find earlier chat messages that contain a word, newest first."""
+        try:
+            with self._connect() as connection:
+                rows = connection.execute(
+                    """
+                    SELECT role, text, created_at FROM chat_log
+                    WHERE text LIKE ?
+                    ORDER BY id DESC
+                    LIMIT ?
+                    """,
+                    (f"%{keyword.strip()}%", limit),
+                ).fetchall()
+                return [dict(row) for row in rows]
+        except sqlite3.Error as error:
+            raise RuntimeError(f"Could not search the chat log: {error}") from error

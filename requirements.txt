@@ -1,2 +1,15 @@
+# Highguy AI runs with plain Python - nothing here is required.
+
+# AI brain (talk about anything). Uses Google Gemini's FREE tier - get a key at
+# https://aistudio.google.com/apikey
+google-genai
+
+# Microphone input (speech to text, uses Google - needs internet)
 SpeechRecognition
-PyAudio
+# Microphone access (works on every Python version, including 3.14)
+sounddevice
+# Optional alternative microphone library (no wheel for Python 3.14 yet)
+PyAudio; python_version < "3.14"
+
+# Offline text-to-speech. Without it, the built-in Windows voice is used.
+pyttsx3
